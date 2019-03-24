@@ -8,6 +8,12 @@ class BricketSetSpider (scrapy.Spider):
         SET_SELECTOR = '.set'
         for brickset in response.css(SET_SELECTOR):
             NAME_SELECTOR = 'h1 a ::text'
+            PIECES_SELECTOR = './/dl[dt/text() = "Pieces"]/dd/a/text()'
+            MINIFIGS_SELECTOR = './/dl[dt/text() = "Minifigs"]/dd[2]/a/text()'
+            IMAGE_SELECTOR = 'img ::attr(src)'
             yield {
                 'name': brickset.css(NAME_SELECTOR).extract()[-1],
+                'pieces': brickset.xpath(PIECES_SELECTOR).extract_first(),
+                'minifigs': brickset.xpath(MINIFIGS_SELECTOR).extract_first(),
+                'image': brickset.css(IMAGE_SELECTOR).extract_first(),
             }
