@@ -2,6 +2,7 @@ import scrapy
 
 class BricketSetSpider (scrapy.Spider):
     name = 'brickset_spider'
+    # Set here the start year which the crawler is getting information
     first_year = 2016
     start_urls = ['http://brickset.com/sets/year-' + str(first_year)]
 
